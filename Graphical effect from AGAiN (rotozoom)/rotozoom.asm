@@ -44,9 +44,6 @@ FP_ONE              equ 1024        ; 1.0 in fixed point
     nZoom           dd 0
     nZoomDir        dd 1
 
-    ; Effects enabled flag
-    bEffects        dd 1
-
     ; GDI handles
     hBackDC         dd 0
     hBackBitmap     dd 0
@@ -476,9 +473,9 @@ BoxWndProc proc hWnd:HWND, uMsg:UINT, wParam:WPARAM, lParam:LPARAM
         mov eax, wParam
         and eax, 0FFFFh
         .if eax == TIMER_ID
-            .if bEffects != 0
+
                 invoke DisplayNextFrame
-            .endif
+
             
             invoke GetClientRect, hWnd, addr rcClient
             invoke InvalidateRect, hWnd, addr rcClient, FALSE
